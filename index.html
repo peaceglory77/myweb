@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endtime Glory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Line clamp utility without Tailwind plugin */
+    .line-clamp-2{
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    /* Backdrop blur safety for unsupported browsers */
+    .backdrop-blur{ -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  </style>
+</head>
+<body class="bg-white text-zinc-900">
+  <!-- Header / Nav -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-900/60 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <a href="#home" class="flex items-center gap-2">
+        <span class="h-9 w-9 rounded-xl bg-gradient-to-tr from-orange-200 via-amber-300 to-yellow-500 shadow-inner"></span>
+        <span class="text-xl font-bold tracking-tight text-white">Endtime Glory</span>
+      </a>
+
+      <nav class="hidden gap-6 md:flex" id="navLinksDesktop"></nav>
+
+      <button id="menuBtn" aria-label="Menu" class="md:hidden rounded-xl border border-white/10 p-2 text-zinc-200 hover:bg-white/5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M3.75 5.25a.75.75 0 010-1.5h16.5a.75.75 0 010 1.5H3.75zm0 7.5a.75.75 0 010-1.5h16.5a.75.75 0 010 1.5H3.75zm0 7.5a.75.75 0 010-1.5h16.5a.75.75 0 010 1.5H3.75z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+    </div>
+    <div class="md:hidden hidden" id="mobileMenu">
+      <div class="mx-auto max-w-6xl space-y-1 px-4 pb-4" id="navLinksMobile"></div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+    <!-- Hero -->
+    <section id="home" class="relative isolate flex min-h-[86vh] items-center justify-center overflow-hidden bg-zinc-950">
+      <img src="https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=2060&auto=format&fit=crop" alt="Background" class="absolute inset-0 h-full w-full object-cover opacity-40"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+      <div class="relative z-10 mx-auto max-w-3xl px-4 text-center text-white">
+        <p class="mb-4 inline-flex items-center rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+          For such a time as this
+        </p>
+        <h1 class="text-4xl font-extrabold leading-tight md:text-6xl">Arise &amp; Shine in the Final Hour</h1>
+        <p class="mx-auto mt-4 max-w-2xl text-zinc-200 md:text-lg">
+          Teachings, prophetic insights, and resources to equip the saints for intimacy with Jesus, holiness, and the harvest.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a href="#messages" class="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-zinc-900 shadow-sm hover:shadow">Latest Messages</a>
+          <a href="#bible" class="rounded-2xl border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">Bible Resources</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Messages -->
+    <section id="messages" class="bg-zinc-50 py-16 text-zinc-900">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p class="mb-2 text-xs font-bold uppercase tracking-widest text-amber-600">Teachings</p>
+            <h2 class="text-2xl font-extrabold md:text-3xl">Latest Messages</h2>
+          </div>
+          <a href="#" data-test-id="cta-view-all-messages" class="self-end rounded-xl border border-zinc-300 px-4 py-2 text-sm font-semibold hover:bg-zinc-100">View All</a>
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3" id="messagesGrid"></div>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section id="videos" class="bg-zinc-50 py-16">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-10">
+          <p class="mb-2 text-xs font-bold uppercase tracking-widest text-amber-600">Media</p>
+          <h2 class="text-2xl font-extrabold md:text-3xl">Recent Videos</h2>
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3" id="videosGrid"></div>
+      </div>
+    </section>
+
+    <!-- Storage Book -->
+    <section id="storagebook" class="bg-zinc-50 py-16">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-10 flex items-end justify-between">
+          <h2 class="text-2xl font-extrabold md:text-3xl">Storage Book</h2>
+          <a href="#" class="rounded-xl border border-zinc-300 px-4 py-2 text-sm font-semibold hover:bg-zinc-100">All Books</a>
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3" id="booksGrid"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="bg-zinc-50 py-16 text-zinc-900">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-10">
+          <p class="mb-2 text-xs font-bold uppercase tracking-widest text-amber-600">Mission</p>
+          <h2 class="text-2xl font-extrabold md:text-3xl">About the Ministry</h2>
+        </div>
+        <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+          <img src="https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?q=80&w=1200&auto=format&fit=crop" alt="Prayer" class="h-full w-full rounded-3xl object-cover shadow-sm"/>
+          <div>
+            <h3 class="text-xl font-bold">Our Mandate</h3>
+            <p class="mt-2 text-sm leading-7 text-zinc-700">
+              We exist to equip a consecrated people who love Jesus, hear His voice, and carry His power.
+              Through teaching, prayer, and media, we prepare the Bride of Christ for the Lord’s return.
+            </p>
+            <ul class="mt-4 list-disc pl-5 text-sm text-zinc-700">
+              <li>Daily devotion to the Word and prayer</li>
+              <li>Holiness and the fear of the Lord</li>
+              <li>Training in prophetic discernment</li>
+              <li>Gospel proclamation and the harvest</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bible -->
+    <section id="bible" class="bg-zinc-900 py-16 text-white">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 md:grid-cols-2">
+        <div>
+          <p class="mb-2 text-xs font-bold uppercase tracking-widest text-amber-300">Bible</p>
+          <h2 class="text-2xl font-extrabold md:text-3xl">Daily Word &amp; Study Plans</h2>
+          <p class="mt-2 text-zinc-300">Grow in the Word of God through daily verses, reading plans, and study resources.</p>
+          <div class="mt-6 space-y-3">
+            <div class="rounded-xl bg-white/10 p-3">
+              <p class="text-sm">📖 Today’s Verse:</p>
+              <p class="mt-1 text-lg font-semibold">“The Lord is my light and my salvation; whom shall I fear?” – Psalm 27:1</p>
+            </div>
+            <a href="#" class="inline-block rounded-xl bg-white px-5 py-2 text-sm font-semibold text-zinc-900">Start 30-Day Bible Plan</a>
+          </div>
+        </div>
+        <div class="rounded-3xl bg-gradient-to-tr from-amber-50 to-white p-8 ring-1 ring-amber-100 text-zinc-900">
+          <h3 class="text-xl font-bold">Bible Study Updates</h3>
+          <p class="mt-1 text-sm">Get weekly verses, notes, and study materials in your inbox.</p>
+          <form id="bibleForm" class="mt-4 flex flex-col gap-3 sm:flex-row">
+            <input required type="email" placeholder="your@email.com" class="h-11 w-full flex-1 rounded-xl border border-zinc-300 px-4 text-sm"/>
+            <button class="h-11 rounded-xl bg-amber-600 px-5 text-sm font-semibold text-white hover:bg-amber-700" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="border-t border-zinc-200 bg-white py-12 text-zinc-700">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 md:grid-cols-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="h-9 w-9 rounded-xl bg-gradient-to-tr from-orange-200 via-amber-300 to-yellow-500 shadow-inner"></span>
+          <span class="text-xl font-bold tracking-tight">Endtime Glory</span>
+        </div>
+        <p class="mt-3 text-sm text-zinc-600">Equipping believers for intimacy, holiness, and harvest in the last days.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Quick Links</h4>
+        <ul id="quickLinks" class="mt-3 space-y-2 text-sm"></ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Contact</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>Email: hello@endtimeglory.org</li>
+          <li>Phone: (555) 555-1234</li>
+          <li>Los Angeles, CA</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Bible</h4>
+        <p class="mt-3 text-sm text-zinc-600">Study plans and scripture resources to strengthen your walk.</p>
+        <a href="#bible" class="mt-3 inline-block rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800">Explore Bible</a>
+      </div>
+    </div>
+    <div class="mx-auto mt-10 max-w-6xl px-4 text-xs text-zinc-500">
+      © <span id="year"></span> Endtime Glory. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // ---------------- Data ----------------
+    const NAV = [
+      { label: "Home", href: "#home" },
+      { label: "Messages", href: "#messages" },
+      { label: "Videos", href: "#videos" },
+      { label: "Storage Book", href: "#storagebook" }, // renamed + fixed anchor
+      { label: "Bible", href: "#bible" },
+      { label: "About", href: "#about" },
+      { label: "Contact", href: "#contact" },
+    ];
+
+    const MESSAGES = [
+      {
+        title: "Awake, Watch, and Pray",
+        date: "Aug 12, 2025",
+        excerpt:
+          "A call to spiritual alertness in the final hour—cultivating intimacy, discernment, and obedience.",
+        image:
+          "https://images.unsplash.com/photo-1471879832106-c7ab9e0cee23?q=80&w=1200&auto=format&fit=crop",
+        link: "#",
+      },
+      {
+        title: "The Seven Lamps of Fire",
+        date: "Aug 05, 2025",
+        excerpt:
+          "A practical look at walking with the Spirit of the Lord and the six spirits of Isaiah 11.",
+        image:
+          "https://images.unsplash.com/photo-1508444845599-5f53024be34f?q=80&w=1200&auto=format&fit=crop",
+        link: "#",
+      },
+      {
+        title: "Preparing an Altar in Your Home",
+        date: "Jul 29, 2025",
+        excerpt:
+          "Simple rhythms of fasting, prayer, and consecration to host the presence of God daily.",
+        image:
+          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+        link: "#",
+      },
+    ];
+
+    const VIDEOS = [
+      {
+        title: "Prophetic Watch: August",
+        thumbnail:
+          "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      {
+        title: "Teaching: The Spirit of Elijah",
+        thumbnail:
+          "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200&auto=format&fit=crop",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      {
+        title: "Prayer & Intercession Night",
+        thumbnail:
+          "https://images.unsplash.com/photo-1455849318743-b2233052fcff?q=80&w=1200&auto=format&fit=crop",
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+    ];
+
+    const BOOKS = [
+      {
+        title: "The Final Hour Prophecy",
+        author: "John Doe",
+        published: "2024",
+        desc: "A deep dive into the signs of the times with biblical accuracy.",
+        cover: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=800",
+        link: "#",
+      },
+      {
+        title: "Into his likeness",
+        author: "Yonas Kibreab",
+        published: "2023",
+        desc: "Those whom God foreknew were predestined to be conformed to the image of His Son Romans 8:29.",
+        cover: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=800",
+        link: "#",
+      },
+      {
+        title: "The Watchmen’s Cry",
+        author: "David Aaron",
+        published: "2025",
+        desc: "Equipping intercessors for the midnight hour.",
+        cover: "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800",
+        link: "#",
+      },
+    ];
+
+    // ---------------- Render Helpers ----------------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    function renderNav() {
+      const mkLink = (n) => `<a href="${n.href}" class="text-sm font-medium text-zinc-200 hover:text-white">${n.label}</a>`;
+      $("#navLinksDesktop").innerHTML = NAV.map(mkLink).join("");
+      $("#navLinksMobile").innerHTML = NAV.map(n =>
+        `<a href="${n.href}" class="block rounded-xl px-3 py-2 text-sm font-medium text-zinc-200 hover:bg-white/5">${n.label}</a>`
+      ).join("");
+      $("#quickLinks").innerHTML = NAV.map(n =>
+        `<li><a class="hover:text-amber-700" href="${n.href}">${n.label}</a></li>`
+      ).join("");
+    }
+
+    function renderMessages() {
+      $("#messagesGrid").innerHTML = MESSAGES.map(post => `
+        <article class="group overflow-hidden rounded-2xl border border-zinc-100 bg-white shadow-sm transition hover:shadow-md">
+          <a href="${post.link}" class="block">
+            <div class="aspect-[16/9] w-full overflow-hidden">
+              <img src="${post.image}" alt="${post.title}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"/>
+            </div>
+            <div class="p-4">
+              <p class="text-xs uppercase tracking-wider text-zinc-500">${post.date}</p>
+              <h3 class="mt-1 text-lg font-semibold text-zinc-900">${post.title}</h3>
+              <p class="mt-2 text-sm text-zinc-600 line-clamp-2">${post.excerpt}</p>
+              <div class="mt-4 text-sm font-semibold text-amber-700">Read more →</div>
+            </div>
+          </a>
+        </article>
+      `).join("");
+    }
+
+    function renderVideos() {
+      $("#videosGrid").innerHTML = VIDEOS.map(v => `
+        <a href="${v.url}" target="_blank" rel="noreferrer"
+           class="group overflow-hidden rounded-2xl border border-zinc-100 bg-white shadow-sm transition hover:shadow-md">
+          <div class="aspect-[16/9] w-full overflow-hidden">
+            <img src="${v.thumbnail}" alt="${v.title}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"/>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-zinc-900">${v.title}</h3>
+            <p class="mt-1 text-sm text-zinc-600">Watch on YouTube →</p>
+          </div>
+        </a>
+      `).join("");
+    }
+
+    function renderBooks() {
+      $("#booksGrid").innerHTML = BOOKS.map(book => `
+        <div class="flex flex-col rounded-2xl border border-zinc-200 bg-white shadow-sm">
+          <img src="${book.cover}" alt="${book.title}" class="h-48 w-full rounded-t-2xl object-cover"/>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">${book.title}</h3>
+            <p class="text-xs text-zinc-500">${book.author} • ${book.published}</p>
+            <p class="mt-2 text-sm text-zinc-600">${book.desc}</p>
+            <a href="${book.link}" class="mt-3 inline-block rounded-xl bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700">
+              Read / Download
+            </a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // ---------------- Behavior ----------------
+    function initMenu() {
+      const menuBtn = $("#menuBtn");
+      const mobile = $("#mobileMenu");
+      const closeOnScroll = () => mobile.classList.add("hidden");
+
+      menuBtn.addEventListener("click", () => {
+        mobile.classList.toggle("hidden");
+      });
+      window.addEventListener("scroll", closeOnScroll);
+
+      // Close mobile menu after clicking a link
+      $("#navLinksMobile").addEventListener("click", (e) => {
+        if (e.target.closest("a")) mobile.classList.add("hidden");
+      });
+    }
+
+    function initForms() {
+      $("#bibleForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Thanks! You'll receive our Bible study updates.");
+        e.target.reset();
+      });
+    }
+
+    function setYear() {
+      $("#year").textContent = new Date().getFullYear();
+    }
+
+    // ---------------- Smoke Tests (console) ----------------
+    function smokeTests() {
+      const results = [];
+      const assert = (name, cond) => { results.push({ name, pass: !!cond }); console.assert(cond, name); };
+
+      assert("NAV has at least 5 items", NAV.length >= 5);
+      assert("Messages have required fields", MESSAGES.every(m => m.title && m.date && m.excerpt && m.image && m.link));
+      assert("Videos have required fields", VIDEOS.every(v => v.title && v.thumbnail && v.url));
+
+      const sectionIds = ["home", "messages", "videos", "storagebook", "bible", "about", "contact"];
+      assert("All key sections exist in DOM", sectionIds.every(id => document.getElementById(id)));
+
+      assert("Message cards count matches MESSAGES length", (document.querySelectorAll('#messages article').length || 0) === MESSAGES.length);
+      assert("Video cards count matches VIDEOS length", (document.querySelectorAll('#videos a[target="_blank"]').length || 0) === VIDEOS.length);
+
+      assert("NAV hrefs are unique", new Set(NAV.map(n => n.href)).size === NAV.length);
+      assert("All NAV hrefs are hash anchors", NAV.every(n => typeof n.href === "string" && n.href.startsWith("#")));
+      assert("Header nav has correct number of items", (document.querySelectorAll('header nav a').length || 0) === NAV.length);
+
+      const httpsOk = [
+        ...MESSAGES.map(m => m.image),
+        ...VIDEOS.map(v => v.thumbnail),
+        ...VIDEOS.map(v => v.url),
+      ].every(u => typeof u === 'string' && (u.startsWith('https://') || u.startsWith('#')));
+      assert("External URLs use https", httpsOk);
+
+      const parseableDates = [...MESSAGES.map(m => m.date)].every(d => !Number.isNaN(Date.parse(d)));
+      assert("Message dates are parseable", parseableDates);
+
+      console.log("SmokeTests results:", results);
+    }
+
+    // ---------------- Bootstrap ----------------
+    function init() {
+      renderNav();
+      renderMessages();
+      renderVideos();
+      renderBooks();
+      initMenu();
+      initForms();
+      setYear();
+      // Delay smoke tests until after rendering
+      setTimeout(smokeTests, 0);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
